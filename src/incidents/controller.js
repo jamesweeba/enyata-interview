@@ -46,17 +46,9 @@ function fetchIncidents(dbConnection, data) {
         }
         pgstream.fetch(dbConnection, fetchdata, params).then(response => {
             return resolve(response.data)
-
         }).catch(err => {
             return reject(err);
         })
-
-
-
-
-
-        // pgstream.fetch(dbConnection,fetchdata,params)
-        // return resolve({ status_code: 201, message: "success" });
     })
 }
 
