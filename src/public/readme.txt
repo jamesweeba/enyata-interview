@@ -15,7 +15,8 @@ https://enyata-interview.herokuapp.com/api/v1/incidents?client_id=12&incident_de
 
 
 GET (fetch a single incident with incident id)
-https://enyata-interview.herokuapp.com/api/v1/incidents/123
+
+https://enyata-interview.herokuapp.com/api/v1/incidents/b0b5b678-31bd-11ed-b1b4-0e76c4be424f
 
 
 
