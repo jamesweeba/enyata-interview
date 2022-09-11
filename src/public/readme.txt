@@ -1,23 +1,27 @@
 
 GET(fetch incidents)
 
-http://localhost:1700/api/v1/incidents
+https://enyata-interview.herokuapp.com/api/v1/incidents
 
 
 GET (fetch incidents with paginatination)
 
-http://localhost:1700/api/v1/incidents?page=1&limit=2
+https://enyata-interview.herokuapp.com/api/v1/incidents?page=1&limit=1
 
 
 GET (fetch incidents with search params)
 
-http://localhost:1700/api/v1/incidents?client_id=12&incident_desc=name&city=name&country=name
+https://enyata-interview.herokuapp.com/api/v1/incidents?client_id=12&incident_desc=name&city=name&country=name
+
+
+GET (fetch a single incident with incident id)
+https://enyata-interview.herokuapp.com/api/v1/incidents/123
 
 
 
 POST(create incident)
 
-http://localhost:1700/api/v1/incidents
+https://enyata-interview.herokuapp.com/api/v1/incidents
 
 requestPayload={  
     "client_id":123,
@@ -25,5 +29,4 @@ requestPayload={
     "city":"name",
     "country":"mmmm"
 }
-
 

@@ -29,7 +29,7 @@ const success = function (data, dbConnection, res) {
         switch (data.status_code) {
             case 200:
                 return res.status(data.status_code).json(data);
-                case 201:
+            case 201:
                 return res.status(data.status_code).json(data);
             case 404:
                 return res.status(data.status_code).json(data);
@@ -89,7 +89,7 @@ const error = function (data, dbConnection, res) {
     pgStream.rollback(dbConnection).then(() => {
         switch (data.status) {
             case 400:
-                return res.status(400).json({...data });
+                return res.status(400).json({ ...data });
             default:
                 return res.status(500).json({ status: 500, "message": "Internal server error" });
         }
@@ -99,13 +99,20 @@ const error = function (data, dbConnection, res) {
     })
 }
 
+const paramKeys = function (data) {
+    let fields = Object.keys(data).
+    filter(key=>key!="page" && key!="limit" && key!="total" && key!="offset");
+    return fields
+}
+
 
 
 module.exports = {
     makeHttpRequest,
     success,
     validate,
-    error
+    error,
+    paramKeys
 }
 
 

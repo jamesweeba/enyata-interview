@@ -16,16 +16,26 @@
 
 -- // First migration.
 -- Migration SQL that makes the change goes here.
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 CREATE TABLE incidents(
-client_id INT PRIMARY KEY NOT NULL,
+id UUID PRIMARY KEY  NOT NULL UNIQUE DEFAULT uuid_generate_v1(),	
+client_id INT NOT NULL,
 incident_desc varchar not null,
 city varchar not null,
 country varchar not null,
 weather_report jsonb not null,
-data timestamp default now()
+date DATE NOT NULL DEFAULT CURRENT_DATE
 
 );
-
+CREATE INDEX idx_client_id
+ON incidents (client_id);
+CREATE INDEX idx_incident_desc
+ON incidents (incident_desc);
+CREATE INDEX idx_city
+ON incidents (city);
+CREATE INDEX idx_country
+ON incidents (country);
 
 -- //@UNDO
 -- SQL to undo the change goes here.
