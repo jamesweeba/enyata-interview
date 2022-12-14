@@ -35,11 +35,7 @@ function fetchIncidents(dbConnection, data) {
         delete data.page;
         delete data.limit;
         delete data.offset;
-
         let fields = Object.keys(data);
-        console.log(fields)
-        
-       
         let fetchdata = sql.fetchIncidents(fields, limit, page);
         let params = [limit, page];
         if (fields.length > 0) {
