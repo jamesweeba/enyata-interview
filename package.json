@@ -18,5 +18,8 @@
     "request": "^2.88.2",
     "swagger-jsdoc": "^6.2.5",
     "swagger-ui-express": "^4.6.0"
+  },
+  "engines": {
+    "node": "10.16.0"
   }
 }
