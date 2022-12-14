@@ -14,16 +14,6 @@ let saveIncidentSchema = {
     required: ['client_id', 'incident_desc', 'city','country','weather_report']
 }
 
-let fetchIncidentSchema={
-    type: "object",
-    properties:{
-        id: { type: "string" },
-    },
-    additionalProperties:false,
-    required:['id']
-}
-
 module.exports= {
-    saveIncidentSchema,
-    fetchIncidentSchema
+    saveIncidentSchema
 };

@@ -3,7 +3,6 @@ const controller = require("./controller")
 const pgstream = require('pgconnect-lite');
 const { makeHttpRequest, success, error } = require("../utils/utils")
 const config = require("../config/config")
-// const api=require("../utils/utils")
 
 
 function saveIncident(req, res) {
@@ -35,12 +34,14 @@ function saveIncident(req, res) {
 function fetchIncidents(req, res) {
     dbConnection = null;
     let data = req.query;
-    let payload = {}
+    let payload={}
+
+    
     pgstream.connect().then(dbClient => {
         return dbClient
     }).then(dbClient => {
         dbConnection = dbClient
-        return controller.countIncidents(dbConnection,data)
+        return controller.countIncidents(dbConnection)
     }).then((countResponse) => {
         let totalCount = parseInt(countResponse.count);
         let { limit, page } = data;
@@ -62,20 +63,20 @@ function fetchIncidents(req, res) {
         }
         let offset = (data.page - 1) * data.limit;
         data.offset = offset;
-        total = data.total;
-        payload.total = totalCount;
-        payload.page = data.page;
+        total=data.total;
+        payload.total= totalCount;
+        payload.page=data.page;
         return controller.fetchIncidents(dbConnection, data)
     }).then(response => {
         let { count } = response;
-        let { page, total } = payload;
+        let {page,total}=payload;
         let combined = {
-            total: total,
+            total:   total,
             pageSize: response.count,
-            pageNumber: parseInt(page),
+            pageNumber: page,
             data: response.items
         }
-        let data = { status_code: 200, message: "success", data: combined }
+        let data = { status_code: 200, data: combined }
         if (count == 0) {
             data = { status_code: 404, message: "Not found" }
         }
@@ -86,28 +87,8 @@ function fetchIncidents(req, res) {
 
 }
 
-function fetchIncident(req, res) {
-    dbConnection = null;
-    let data = req.params
-    pgstream.connect().then(dbCleint => {
-        return dbCleint
-    }).then(dbClient => {
-        dbConnection = dbClient
-        return controller.fetchIncident(dbConnection, data)
-    }).then(response => {
-        let data = { status_code: 200, message: "success", data: response }
-        if (!response) {
-            data = { status_code: 404, message: "Not found" }
-        }
-        success(data, dbConnection, res)
-    }).catch(err => {
-        error(err, dbConnection, res)
-    })
-}
-
 module.exports = {
     saveIncident,
-    fetchIncidents,
-    fetchIncident
+    fetchIncidents
 
 }
