@@ -12,7 +12,7 @@
         },
         connectionTimeoutMillis: process.env.PG_CONNECT_TIMEOUT ,
         idleTimeoutMillis: process.env.PG_IDLE_TIMEOUT ,
-        max: process.env.PG_MAX_POOL ,
+        max: process.env.PG_MAX_POOL 
        
       }   
       

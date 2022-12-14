@@ -28,6 +28,6 @@ const swaggerOption={
 const specs=swaggerJSDoc(swaggerOption);
 app.use("/api-docs",swaggerUI.serve,swaggerUI.setup(specs));
 pgstream.init(dbConfig.postgresdb['local']);
-// app.get("/", (req, res) => {return res.sendFile(path.join(__dirname, "/public/readme.txt"))})
+ app.get("/", (req, res) => {return res.sendFile(path.join(__dirname, "/public/readme.txt"))})
 setUp(app);
 app.listen(port, () => {console.log("magic happens on port " + port)})
