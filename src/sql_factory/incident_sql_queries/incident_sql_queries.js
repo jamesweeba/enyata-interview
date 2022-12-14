@@ -2,7 +2,7 @@ module.exports = {
     saveIncidents: () => {
         let sql = `insert into incidents
                     (client_id,incident_desc,city,country,weather_report)
-                    values ($1,$2,$3,$4,$5)`;
+                    values ($1,$2,$3,$4,$5) returning client_id,incident_desc,city,country,weather_report,date`;
         return sql;
 
     },

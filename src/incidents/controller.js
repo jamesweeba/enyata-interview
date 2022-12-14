@@ -18,10 +18,10 @@ function saveIncident(dbConnection, data) {
         }
         let { client_id, incident_desc, city, country, weather_report } = data;
         let params = [client_id, incident_desc, city, country, JSON.stringify(weather_report)]
-        pgstream.insert(dbConnection, insertIncident, params).then(() => {
-            return resolve({ status_code: 201, message: "success" });
+        pgstream.insert(dbConnection, insertIncident, params).then((response) => {
+            let{items}=response.data;
+            return resolve({ status_code: 201, message: "success" ,data:items[0]});
         }).catch(err => {
-            console.log(err);
             return reject(err)
         })
     })
@@ -34,9 +34,12 @@ function fetchIncidents(dbConnection, data) {
         let page = data.offset;
         delete data.page;
         delete data.limit;
-        delete data.total;
         delete data.offset;
+
         let fields = Object.keys(data);
+        console.log(fields)
+        
+       
         let fetchdata = sql.fetchIncidents(fields, limit, page);
         let params = [limit, page];
         if (fields.length > 0) {

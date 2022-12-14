@@ -24,7 +24,6 @@ function saveIncident(req, res) {
     }).then(response => {
         success(response, dbConnection, res)
     }).catch(err => {
-        console.log(err);
         error(err, dbConnection, res)
     })
 
@@ -66,6 +65,7 @@ function fetchIncidents(req, res) {
         total=data.total;
         payload.total= totalCount;
         payload.page=data.page;
+     
         return controller.fetchIncidents(dbConnection, data)
     }).then(response => {
         let { count } = response;
@@ -73,7 +73,7 @@ function fetchIncidents(req, res) {
         let combined = {
             total:   total,
             pageSize: response.count,
-            pageNumber: page,
+            pageNumber: parseInt(page),
             data: response.items
         }
         let data = { status_code: 200, data: combined }
@@ -82,6 +82,7 @@ function fetchIncidents(req, res) {
         }
         success(data, dbConnection, res)
     }).catch(err => {
+      
         error(err, dbConnection, res)
     })
 

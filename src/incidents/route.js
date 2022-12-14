@@ -102,6 +102,54 @@ const service = require("./service")
  *       500:
  *          description: Internal server error
  */
+
+
+/**
+ * @swagger
+ * /api/v1/incidents:
+ *   get:
+ *      summary: Get incident report by search
+ *      tags: [Incidents]
+ *      
+ *      parameters:
+ *       - in: query
+ *         name: city
+ *         schema: 
+ *           type: string
+ *         description: the city value to search
+ *       - in: query
+ *         name: country
+ *         schema:
+ *           type: string
+ *         description: the country value to search
+ *       - in: query
+ *         name: client_id
+ *         schema:
+ *           type: integer
+ *         description: the client id
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *         description: number of items to return
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *         description: the page number
+ *      responses:
+ *         200:
+ *           description: the incident report search
+ *           content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Create_Incident'
+ *         404:
+ *           description: Not found
+ * 
+ *    
+ */
+
 router.get("/", service.fetchIncidents);
 
 
@@ -112,6 +160,7 @@ router.get("/", service.fetchIncidents);
  * /api/v1/incidents:
  *  post:
  *   summary: Create a new incident
+ *   tags: [incidents]
  *   requestBody:
  *    required: true
  *    content:
@@ -122,6 +171,10 @@ router.get("/", service.fetchIncidents);
  *   responses:
  *     201:
  *       description: Incident Created Successfully
+ *       content:
+ *        application/json:
+ *         schema:
+ *          $ref: '#/components/schemas/Incidents'
  *     400:
  *       description: Bad Request
  *     500: 
